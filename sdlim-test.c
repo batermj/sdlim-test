@@ -1,5 +1,5 @@
 /*
-    sdlim-demo: Prints Unicode characters with SDL_ttf as they are typed.
+    sdlim-test: Prints Unicode characters with SDL_ttf as they are typed.
     Copyright (C) 2009 Simos Xenitellis
 
     Based on showfont.c by Sam Lantinga, slouken@libsdl.org

@@ -1,4 +1,4 @@
-sdlim-demo.c is a simple SDL program that prints in a window 
+sdlim-test.c is a simple SDL program that prints in a window 
 the character that was last pressed. It uses SDL_ttf for printing.
 The purpose of this program is to help test the new Input Method
 support in SDL.
