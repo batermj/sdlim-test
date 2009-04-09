@@ -191,6 +191,12 @@ int main(int argc, char *argv[])
 			SDL_MapRGB(screen->format, backcol->r, backcol->g, backcol->b));
 	SDL_Flip(screen);
 
+	/* Enable Unicode keyboard translation */
+	if (SDL_EnableUNICODE(1))
+		puts("Unicode keyboard translation is already enabled");
+	else
+		puts("Enabled Unicode keyboard translation");
+
 	/* Render and center the message */
 	message = DEFAULT_TEXT;
 
@@ -261,7 +267,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case SDL_TEXTINPUT:
-				// printf("%s\n", event.text.text);
+				printf("Printing character %s\n", event.text.text);
 				SDL_FillRect(screen, NULL, 0xFFFFFF);
 				text = TTF_RenderUTF8_Solid(font,event.text.text,*forecol);
 				dstrect.x = (screen->w - text->w)/2;
