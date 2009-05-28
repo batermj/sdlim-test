@@ -259,11 +259,11 @@ int main(int argc, char *argv[])
 				break;
 
 			case SDL_KEYDOWN:
-				PrintKey(&event.key.keysym, 0);
+				PrintKey(&event.key.keysym, 1);
 				break;
 
 			case SDL_KEYUP:
-				PrintKey(&event.key.keysym, 1);
+				PrintKey(&event.key.keysym, 0);
 				break;
 
 			case SDL_TEXTINPUT:
