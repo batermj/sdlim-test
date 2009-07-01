@@ -112,27 +112,6 @@ PrintKey(SDL_keysym * sym, int pressed)
     printf("\n");
 }
 
-static void
-DrawCharacter(SDL_Surface *screen, TTF_Font *font, SDL_Color *forecol, char* message)
-{
-	SDL_Surface* text;
-
-	SDL_FillRect(screen, NULL, 0xFFFFFF);
-	//text = TTF_RenderUTF8_Solid(font,event.text.text,*forecol);
-	//dstrect.x = (screen->w - text->w)/2;
-	//dstrect.y = (screen->h - text->h)/2;
-	//dstrect.w = text->w;
-	//dstrect.h = text->h;
-	//if ( SDL_BlitSurface(text, NULL, screen,
-	//			&dstrect) == 0 ) {
-	//	SDL_Flip(screen);
-	//} else {
-	//	fprintf(stderr,
-	//	"Couldn't blit text to display: %s\n", 
-	//				SDL_GetError());
-	//}
-}
-
 int main(int argc, char *argv[])
 {
 	SDL_Surface *screen;
