@@ -112,6 +112,27 @@ PrintKey(SDL_keysym * sym, int pressed)
     printf("\n");
 }
 
+static void
+DrawCharacter(SDL_Surface *screen, TTF_Font *font, SDL_Color *forecol, char* message)
+{
+	SDL_Surface* text;
+
+	SDL_FillRect(screen, NULL, 0xFFFFFF);
+	//text = TTF_RenderUTF8_Solid(font,event.text.text,*forecol);
+	//dstrect.x = (screen->w - text->w)/2;
+	//dstrect.y = (screen->h - text->h)/2;
+	//dstrect.w = text->w;
+	//dstrect.h = text->h;
+	//if ( SDL_BlitSurface(text, NULL, screen,
+	//			&dstrect) == 0 ) {
+	//	SDL_Flip(screen);
+	//} else {
+	//	fprintf(stderr,
+	//	"Couldn't blit text to display: %s\n", 
+	//				SDL_GetError());
+	//}
+}
+
 int main(int argc, char *argv[])
 {
 	SDL_Surface *screen;
@@ -167,10 +188,10 @@ int main(int argc, char *argv[])
 	}
 	TTF_SetFontStyle(font, renderstyle);
 
-	/* Set a 640x480x16 video mode */
-	screen = SDL_SetVideoMode(640, 480, 16, SDL_SWSURFACE);
+	/* Set a 400x300x16 video mode */
+	screen = SDL_SetVideoMode(400, 300, 16, SDL_SWSURFACE);
 	if ( screen == NULL ) {
-		fprintf(stderr, "Couldn't set 640x480x16 video mode: %s\n",
+		fprintf(stderr, "Couldn't set 400x300x16 video mode: %s\n",
 							SDL_GetError());
 		cleanup(2);
 	}
@@ -264,6 +285,10 @@ int main(int argc, char *argv[])
 
 			case SDL_KEYUP:
 				PrintKey(&event.key.keysym, 0);
+				printf("\n");
+				break;
+
+			case SDL_VIDEOEXPOSE:
 				break;
 
 			case SDL_TEXTINPUT:
