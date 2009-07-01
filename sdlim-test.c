@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
 		RENDER_UTF8,
 		RENDER_UNICODE
 	} rendertype;
-	char *message, string[256];
+	char message[256] = "ϻ";
 
 	ptsize = 288;
 	/* Look for special rendering types */
@@ -196,9 +196,6 @@ int main(int argc, char *argv[])
 		puts("Unicode keyboard translation is already enabled");
 	else
 		puts("Enabled Unicode keyboard translation");
-
-	/* Render and center the message */
-	message = DEFAULT_TEXT;
 
 	switch (rendertype) {
 
@@ -268,12 +265,27 @@ int main(int argc, char *argv[])
 				break;
 
 			case SDL_VIDEOEXPOSE:
+				SDL_FillRect(screen, NULL, 0xFFFFFF);
+				text = TTF_RenderUTF8_Solid(font, message, *forecol);
+				dstrect.x = (screen->w - text->w)/2;
+				dstrect.y = (screen->h - text->h)/2;
+				dstrect.w = text->w;
+				dstrect.h = text->h;
+				if ( SDL_BlitSurface(text, NULL, screen,
+							&dstrect) == 0 ) {
+					SDL_Flip(screen);
+				} else {
+					fprintf(stderr,
+					"Couldn't blit text to display: %s\n", 
+								SDL_GetError());
+				}
 				break;
 
 			case SDL_TEXTINPUT:
-				printf("Printing character %s\n", event.text.text);
+				strncpy(message, event.text.text, sizeof(message));
+				printf("Printing character %s\n", message);
 				SDL_FillRect(screen, NULL, 0xFFFFFF);
-				text = TTF_RenderUTF8_Solid(font,event.text.text,*forecol);
+				text = TTF_RenderUTF8_Solid(font, message, *forecol);
 				dstrect.x = (screen->w - text->w)/2;
 				dstrect.y = (screen->h - text->h)/2;
 				dstrect.w = text->w;
