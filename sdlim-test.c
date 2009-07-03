@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <locale.h>
 
 #ifdef HAVE_ICONV
 #include <iconv.h>
@@ -136,7 +137,7 @@ int main(int argc, char *argv[])
 	} rendertype;
 	char message[256] = "ϻ";
 
-	ptsize = 288;
+	ptsize = 200;
 	/* Look for special rendering types */
 	rendersolid = 0;
 	renderstyle = TTF_STYLE_NORMAL;
@@ -144,6 +145,12 @@ int main(int argc, char *argv[])
 	/* Default is black and white */
 	forecol = &black;
 	backcol = &white;
+
+	if (!setlocale(LC_CTYPE, ""))
+	{
+		fprintf(stderr, "Could not set the locale.\n");
+		return (3);
+	}
 
 	/* Initialize SDL */
 	if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
@@ -260,8 +267,7 @@ int main(int argc, char *argv[])
 				break;
 
 			case SDL_KEYUP:
-				PrintKey(&event.key.keysym, 0);
-				printf("\n");
+				// PrintKey(&event.key.keysym, 0);
 				break;
 
 			case SDL_VIDEOEXPOSE:
@@ -298,6 +304,7 @@ int main(int argc, char *argv[])
 					"Couldn't blit text to display: %s\n", 
 								SDL_GetError());
 				}
+				printf("\n");
 				
 			default:
 				break;
